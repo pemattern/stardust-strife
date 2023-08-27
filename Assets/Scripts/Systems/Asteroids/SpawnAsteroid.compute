@@ -1,0 +1,29 @@
+#pragma kernel SpawnAsteroid
+#include "FastNoiseLite.hlsl"
+
+int Size;
+int Seed;
+float Cutoff;
+RWStructuredBuffer<int> Asteroids;
+
+
+[numthreads(4, 4, 4)]
+void SpawnAsteroid(uint3 id : SV_DispatchThreadID)
+{
+    fnl_state state = fnlCreateState(Seed);
+    state.noise_type = FNL_NOISE_PERLIN;
+    state.fractal_type = FNL_FRACTAL_FBM;
+	state.frequency = .01f;
+	state.octaves = 4;
+	state.lacunarity = 2.f;
+	state.gain = .5f;
+
+    float value = fnlGetNoise3D(state, id.x * float(Size), id.y * float(Size), id.z * float(Size));
+
+    value += 1;
+    value *= 0.5;
+
+    int index = id.x + id.y * Size + id.z * Size * Size;
+    int output = value > Cutoff ? 1 : 0;
+    Asteroids[index] = output;
+}
