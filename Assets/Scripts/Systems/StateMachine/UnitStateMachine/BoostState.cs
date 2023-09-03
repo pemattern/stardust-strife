@@ -6,6 +6,8 @@ public class BoostState : State
     public override bool EntryCondition => _unitController.Boost;
     public override bool ExitCondition => Operation.IsCompleted;
 
+    private bool _isToggle = false;
+
     public Task Operation { get; private set; }
     public int CooldownInMilliseconds { get; private set; }
 

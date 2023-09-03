@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody), typeof(UpgradeContainer))]
 public class UnitStateMachine : IndefiniteStateMachine
 {
-    [HideInInspector] public Rigidbody Rigidbody;
-    public IUnitController UnitController;
+    [HideInInspector] public Rigidbody Rigidbody { get; private set; }
+    public IUnitController UnitController { get; private set; }
+    public UpgradeContainer UpgradeContainer { get; private set; }
 
     [SerializeField] private bool _isPlayer;
     [SerializeField] private GameObject _laserPrefab;
@@ -16,6 +17,7 @@ public class UnitStateMachine : IndefiniteStateMachine
     {
         Rigidbody = GetComponent<Rigidbody>();
         UnitController = _isPlayer ? InputHandler.Instance : GetComponent<AIController>();
+        UpgradeContainer = GetComponent<UpgradeContainer>();
 
         Init(new List<State>
         {
