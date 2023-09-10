@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using UnityEngine;
 
 public class Overheat
@@ -6,7 +5,7 @@ public class Overheat
     private float _maxValue, _increment, _coolingRate, _cooldownDelay;
     private float _currentValue;
     private bool _locked;
-    private Task _cooldownDelayTask;
+    private Awaitable _cooldownDelayAwaitable;
     private State _state;
 
     public bool Locked => _locked;
@@ -14,7 +13,7 @@ public class Overheat
     public Overheat(State state, float maxValue, float increment, float coolingRate, float cooldownDelay)
     {
         _locked = false;
-        _cooldownDelayTask = Task.Delay(0);
+        _cooldownDelayAwaitable = Awaitable.WaitForSecondsAsync(0f);
         _maxValue = maxValue;
         _increment = increment;
         _coolingRate = coolingRate;
@@ -29,7 +28,7 @@ public class Overheat
     }
     void Decrement()
     {
-        if (_currentValue > 0f && _cooldownDelayTask.IsCompleted)
+        if (_currentValue > 0f && _cooldownDelayAwaitable.IsCompleted)
         {
             _currentValue -= Time.deltaTime * _coolingRate;
             _currentValue = Mathf.Clamp(_currentValue, 0f, _maxValue);
@@ -40,7 +39,7 @@ public class Overheat
     void Increment()
     {
         if (_locked) return;
-        _cooldownDelayTask = Task.Delay((int)(_cooldownDelay * 1000));
+        _cooldownDelayAwaitable = Awaitable.WaitForSecondsAsync(_cooldownDelay);
         _currentValue += _increment;
         if (_currentValue > _maxValue) Lock();
         _currentValue = Mathf.Clamp(_currentValue, 0f, _maxValue);

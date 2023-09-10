@@ -1,19 +1,18 @@
-using System.Threading.Tasks;
 using UnityEngine;
 
 public abstract class Projectile : MonoBehaviour
 {
-    protected int LifetimeInMilliseconds { get; private set; }
+    protected float LifetimeInSeconds { get; private set; }
     protected float Speed { get; private set; }
     protected int Damage { get; private set; }
-    protected Task Lifetime { get; private set; }
+    protected Awaitable Lifetime { get; private set; }
     protected Unit ShotBy { get; private set; }
 
     [SerializeField] protected GameObject _vfxDamaged;
 
     protected virtual void Start()
     {
-        Lifetime = Task.Delay(LifetimeInMilliseconds);
+        Lifetime = Awaitable.WaitForSecondsAsync(LifetimeInSeconds);
     }
 
     protected virtual void Update()
@@ -46,6 +45,6 @@ public abstract class Projectile : MonoBehaviour
         projectile.Damage = damage;
         projectile.ShotBy = shotBy;
         projectile.Speed = speed;
-        projectile.LifetimeInMilliseconds = (int)(lifetime * 1000);
+        projectile.LifetimeInSeconds = lifetime;
     }
 }
