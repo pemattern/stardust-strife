@@ -5,7 +5,7 @@ public class Hitmarker : MonoBehaviour
 {
     [SerializeField] private Color _hitColor;
     [SerializeField] private Color _destroyColor;
-    [SerializeField] private float _hitmarkerDuration = 0.05f;
+    [SerializeField] private float _hitmarkerDuration;
 
     private Image _image;
     private AudioSource _hitmarkerSound;
