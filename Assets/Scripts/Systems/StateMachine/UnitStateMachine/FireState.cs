@@ -1,13 +1,12 @@
-using System.Threading.Tasks;
 using UnityEngine;
 
 public class FireState : State
 {
     public override bool EntryCondition => _unitController.Fire;
-    public override bool ExitCondition => _fire?.IsCompleted??false;
+    public override bool ExitCondition => _cooldown?.IsCompleted??false;
 
-    private Task _fire;
-    private int _cooldownTime = 150;
+    private Awaitable _cooldown;
+    private float _cooldownInSeconds = 0.15f;
 
     private IUnitController _unitController;
     private GameObject _laser;
@@ -27,7 +26,7 @@ public class FireState : State
 
         //if (_overheat.Locked) return;
 
-        _fire = Task.Delay(_cooldownTime);
+        _cooldown = Awaitable.WaitForSecondsAsync(_cooldownInSeconds);
 
         Projectile.Fire
         (

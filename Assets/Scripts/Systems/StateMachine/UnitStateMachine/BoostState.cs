@@ -1,28 +1,25 @@
 using UnityEngine;
-using System.Threading.Tasks;
 
 public class BoostState : State
 {
     public override bool EntryCondition => _unitController.Boost;
-    public override bool ExitCondition => Operation.IsCompleted;
+    public override bool ExitCondition => _cooldown.IsCompleted;
 
     private bool _isToggle = false;
-
-    public Task Operation { get; private set; }
-    public int CooldownInMilliseconds { get; private set; }
-
+    private Awaitable _cooldown;
+    private float _cooldownInSeconds;
     private IUnitController _unitController;
 
-    public BoostState(UnitStateMachine stateMachine, int cooldownInSeconds) : base(stateMachine)
+    public BoostState(UnitStateMachine stateMachine, float cooldownInSeconds) : base(stateMachine)
     {
         _unitController = stateMachine.UnitController;
-        CooldownInMilliseconds = cooldownInSeconds * 1000;
+        _cooldownInSeconds = cooldownInSeconds;
     }
 
     public override void Enter()
     {
         base.Enter();
-        Operation = Task.Delay(CooldownInMilliseconds);
+        _cooldown = Awaitable.WaitForSecondsAsync(_cooldownInSeconds);
         Camera.main.Shake(4, 7, 1.75f, Ease.Triangle010);
     }
 

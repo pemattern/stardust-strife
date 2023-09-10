@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Threading.Tasks;
 
 public class Hitmarker : MonoBehaviour
 {
     [SerializeField] private Color _hitColor;
     [SerializeField] private Color _destroyColor;
-    [SerializeField] private int _hitmarkerDuration = 50;
+    [SerializeField] private float _hitmarkerDuration = 0.05f;
 
     private Image _image;
     private AudioSource _hitmarkerSound;
@@ -43,7 +40,7 @@ public class Hitmarker : MonoBehaviour
         _image.enabled = true;
         _image.color = color;
         _hitmarkerSound.Play();
-        await Task.Delay(_hitmarkerDuration);
+        await Awaitable.WaitForSecondsAsync(_hitmarkerDuration);
         _image.enabled = false;
     }
 

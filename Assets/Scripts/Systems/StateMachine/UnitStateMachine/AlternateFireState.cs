@@ -1,13 +1,12 @@
-using System.Threading.Tasks;
 using UnityEngine;
 
 public class AlternateFireState : State
 {
     public override bool EntryCondition => _unitController.AlternateFire && EnemyManager.CurrentTarget is not null;
-    public override bool ExitCondition => _fire?.IsCompleted??false;
+    public override bool ExitCondition => _cooldown?.IsCompleted??false;
 
-    private Task _fire;
-    private int _cooldownTime = 10000;
+    private Awaitable _cooldown;
+    private float _cooldownInSeconds = 10f;
 
     private IUnitController _unitController;
     private GameObject _projectile;
@@ -27,7 +26,7 @@ public class AlternateFireState : State
 
         //if (_overheat.Locked) return;
 
-        _fire = Task.Delay(_cooldownTime);
+        _cooldown = Awaitable.WaitForSecondsAsync(_cooldownInSeconds);
 
         Projectile.Fire
         (

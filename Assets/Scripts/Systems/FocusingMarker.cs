@@ -12,7 +12,7 @@ public class FocusingMarker : MonoBehaviour
     private RectTransform _rectTransform;
     private EnemyUnit _currentTarget;
     private EnemyUnit _attemptingToTarget;
-    private Task _focusingDurationTask;
+    private Awaitable _focusingDurationAwaitable;
     private float _targetingCompletion;
 
     public static FocusingMarker Instance;
@@ -24,7 +24,7 @@ public class FocusingMarker : MonoBehaviour
     {
         _image = GetComponent<Image>();
         _rectTransform = GetComponent<RectTransform>();
-        _focusingDurationTask = Task.Delay(0);
+        _focusingDurationAwaitable = Awaitable.WaitForSecondsAsync(0);
     }
 
     void Update()
@@ -64,7 +64,7 @@ public class FocusingMarker : MonoBehaviour
     bool NoTarget() => _attemptingToTarget is null && _currentTarget is null;
     bool Targeting() => _attemptingToTarget is not null && _currentTarget is null && _targetingCompletion < 1f;
     bool TargetAquired() => _targetingCompletion >= 1f && _attemptingToTarget is not null;
-    bool TargetEnd() => _focusingDurationTask.IsCompleted && _currentTarget is not null && !WithinCenteredRadius(_currentTarget.transform.position);
+    bool TargetEnd() => _focusingDurationAwaitable.IsCompleted && _currentTarget is not null && !WithinCenteredRadius(_currentTarget.transform.position);
 
     bool OutOfViewport(Vector3 viewportPos)
     {
@@ -119,7 +119,7 @@ public class FocusingMarker : MonoBehaviour
 
         if (enemyUnit is not null)
         {
-            _focusingDurationTask = Task.Delay((int)(_focusingDuration * 1000));
+            _focusingDurationAwaitable = Awaitable.WaitForSecondsAsync(_focusingDuration);
             return true;
         }
 

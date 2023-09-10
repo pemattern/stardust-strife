@@ -1,6 +1,5 @@
 using UnityEngine;
 using System;
-using System.Threading.Tasks;
 
 public static class CameraShake
 {
@@ -20,7 +19,7 @@ public static class CameraShake
         await MoveTo(camera.transform, Vector3.zero, speed, magnitude, t);
     }
 
-    private static async Task MoveTo(Transform transform, Vector3 targetPosition, float speed, float magnitude, float t)
+    private static async Awaitable MoveTo(Transform transform, Vector3 targetPosition, float speed, float magnitude, float t)
     {
         
         float tShake = 0f;
@@ -32,7 +31,7 @@ public static class CameraShake
         {
             tShake = ProgressNormalized(startingPosition, targetPosition, transform.localPosition);
             transform.localPosition = Vector3.MoveTowards(transform.localPosition, targetPosition, speed * Time.deltaTime);
-            await Task.Yield();
+            await Awaitable.NextFrameAsync();
         }
     }
 

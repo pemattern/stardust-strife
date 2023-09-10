@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    private float _currentSpeed = 0f;
     private Vector3 _velocity = Vector3.zero;
     private Vector3 _velocityRotation = Vector3.zero;
 
@@ -12,12 +9,6 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField, Range(0f, 1f)] private float smoothTime;
     [SerializeField] private float _speedRotation;
-
-
-    void Start()
-    {
-        _currentSpeed = _speed;
-    }
 
     void LateUpdate()
     {
