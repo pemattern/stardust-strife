@@ -1,4 +1,4 @@
-public abstract class Upgrade
+public abstract class Upgrade : IContainerItem
 {
     public abstract string Title { get; } 
     public abstract string Description { get; }
@@ -8,7 +8,7 @@ public abstract class Upgrade
         Unit = unit;
     }
 
-    public virtual void OnAttach()
+    public virtual void OnInsert()
     {
 
     }

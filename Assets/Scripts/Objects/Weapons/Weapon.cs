@@ -1,13 +1,14 @@
 using UnityEngine;
 
-public abstract class Weapon : MonoBehaviour
+public abstract class Weapon : IContainerItem
 {
     public ProjectileSettings ProjectileSettings;
+    public WeaponSettings WeaponSettings;
     private Unit _unit;
 
-    void Start() 
+    public Weapon (Unit unit)
     {
-        _unit = GetComponent<Unit>();
+        _unit = unit;
     }
 
     public void Fire()
@@ -23,4 +24,8 @@ public abstract class Weapon : MonoBehaviour
             ProjectileSettings.Lifetime
         );
     }
+
+    public virtual void OnInsert() { }
+    public virtual void OnRemove() { }
+    public virtual void OnUpdate() {}
 }
