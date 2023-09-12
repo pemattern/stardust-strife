@@ -17,14 +17,11 @@ public class FireState : State
     { 
         _unitController = stateMachine.UnitController;
         _laser = laser;
-        //_overheat = new Overheat();
     }
 
     public override void Enter()
     {
         base.Enter();
-
-        //if (_overheat.Locked) return;
 
         _cooldown = Awaitable.WaitForSecondsAsync(_cooldownInSeconds);
 
