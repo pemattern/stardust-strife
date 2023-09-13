@@ -2,21 +2,22 @@ using UnityEngine;
 
 public class FireState : State
 {
-    public override bool EntryCondition => _unitController.Fire;
+    public override bool EntryCondition => _isPrimary ? _unitController.Fire : _unitController.AlternateFire;
     public override bool ExitCondition => _cooldown?.IsCompleted??false;
 
     private Awaitable _cooldown;
-    private float _cooldownInSeconds = 0.15f;
+    private float _cooldownInSeconds;
 
     private IUnitController _unitController;
-    private GameObject _laser;
+    private Weapon _weapon;
+    private bool _isPrimary;
 
-    private Overheat _overheat;
-
-    public FireState(UnitStateMachine stateMachine, GameObject laser) : base(stateMachine)
+    public FireState(UnitStateMachine stateMachine, Weapon weapon, bool isPrimary) : base(stateMachine)
     { 
         _unitController = stateMachine.UnitController;
-        _laser = laser;
+        _weapon = weapon;
+        _isPrimary = isPrimary;
+        _cooldownInSeconds = weapon.WeaponSettings.Cooldown;
     }
 
     public override void Enter()
@@ -25,28 +26,17 @@ public class FireState : State
 
         _cooldown = Awaitable.WaitForSecondsAsync(_cooldownInSeconds);
 
-        Projectile.Fire
-        (
-            StateMachine.gameObject.GetComponent<Unit>(),
-            _laser,
-            StateMachine.gameObject.transform.right * .5f + StateMachine.gameObject.transform.position, 
-            StateMachine.gameObject.transform.rotation,
-            1,
-            750f,
-            0.33f           
-        );
+        // Projectile.Fire
+        // (
+        //     StateMachine.gameObject.GetComponent<Unit>(),
+        //     _laser ,
+        //     StateMachine.gameObject.transform.right * .5f + StateMachine.gameObject.transform.position, 
+        //     StateMachine.gameObject.transform.rotation,
+        //     1,
+        //     750f,
+        //     0.33f           
+        // );
 
-        Projectile.Fire
-        (
-            StateMachine.gameObject.GetComponent<Unit>(),
-            _laser,
-            StateMachine.gameObject.transform.right * -.5f + StateMachine.gameObject.transform.position, 
-            StateMachine.gameObject.transform.rotation,
-            1,
-            750f,
-            0.33f           
-        );
-
-        //_overheat.Increment();
+        _weapon.Fire();
     }
 }

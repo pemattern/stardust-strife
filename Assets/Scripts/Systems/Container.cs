@@ -9,6 +9,8 @@ public class Container<T> : MonoBehaviour where T : IContainerItem
     private Unit _unit;
     private List<T> _items;
 
+    public T this[int i] => _items[i];
+
     void Start()
     {
         _unit = GetComponent<Unit>();
@@ -42,7 +44,12 @@ public class Container<T> : MonoBehaviour where T : IContainerItem
     {
         return _items.Count();
     }
-    
+
+    public IEnumerable<T> All()
+    {
+        return _items;
+    }
+
     public bool Has<TConcrete>() where TConcrete : T
     {
         return _items.Where(x => typeof(TConcrete) == x.GetType()).Any();

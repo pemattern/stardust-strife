@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody), typeof(UpgradeContainer))]
+[RequireComponent(typeof(Rigidbody), typeof(UpgradeContainer), typeof(WeaponContainer))]
 public class UnitStateMachine : IndefiniteStateMachine
 {
     [HideInInspector] public Rigidbody Rigidbody { get; private set; }
     public IUnitController UnitController { get; private set; }
     public UpgradeContainer UpgradeContainer { get; private set; }
+    public WeaponContainer WeaponContainer { get; private set; }
 
     [SerializeField] private bool _isPlayer;
     [SerializeField] private GameObject _laserPrefab;
@@ -17,13 +18,14 @@ public class UnitStateMachine : IndefiniteStateMachine
         Rigidbody = GetComponent<Rigidbody>();
         UnitController = _isPlayer ? InputHandler.Instance : GetComponent<AIController>();
         UpgradeContainer = GetComponent<UpgradeContainer>();
+        WeaponContainer = GetComponent<WeaponContainer>();
 
         Init(new List<State>
         {
             new MoveState(this),
             new BoostState(this, 5),
-            new FireState(this, _laserPrefab),
-            new AlternateFireState(this, _missilePrefab)
+            new FireState(this, WeaponContainer[0], true),
+            new FireState(this, WeaponContainer[1], false)
         }, 0);
     }
 }

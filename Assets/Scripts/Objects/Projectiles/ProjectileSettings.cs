@@ -6,6 +6,5 @@ public class ProjectileSettings : ScriptableObject
     public GameObject Prefab;
     public float Speed;
     public float Lifetime;
-    public float Cooldown;
     public int Damage;
 }

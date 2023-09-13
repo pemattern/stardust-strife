@@ -2,11 +2,8 @@ using UnityEngine;
 
 public class Missile : Projectile
 {
-    private TargetPrediction _targetPrediction;
     private Rigidbody _rigidbody;
     private Transform _enemy;
-    private Vector3 _standardPrediction, _deviatedPrediction;
-
 
     protected override void Start()
     {

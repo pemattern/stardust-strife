@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class Weapon : IContainerItem
 {
-    public ProjectileSettings ProjectileSettings;
+    [SerializeField] private ProjectileSettings _projectileSettings;
     public WeaponSettings WeaponSettings;
     private Unit _unit;
 
@@ -16,16 +16,16 @@ public abstract class Weapon : IContainerItem
         Projectile.Fire
         (
             _unit,
-            ProjectileSettings.Prefab,
+            _projectileSettings.Prefab,
             Vector3.zero,
             Quaternion.identity,
-            ProjectileSettings.Damage,
-            ProjectileSettings.Speed,
-            ProjectileSettings.Lifetime
+            _projectileSettings.Damage,
+            _projectileSettings.Speed,
+            _projectileSettings.Lifetime
         );
     }
 
     public virtual void OnInsert() { }
     public virtual void OnRemove() { }
-    public virtual void OnUpdate() {}
+    public virtual void OnUpdate() { }
 }
