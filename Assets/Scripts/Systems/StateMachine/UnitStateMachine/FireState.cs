@@ -17,7 +17,7 @@ public class FireState : State
         _unitController = stateMachine.UnitController;
         _weapon = weapon;
         _isPrimary = isPrimary;
-        _cooldownInSeconds = weapon.WeaponSettings.Cooldown;
+        _cooldownInSeconds = weapon.WeaponCooldown;
     }
 
     public override void Enter()
@@ -25,18 +25,6 @@ public class FireState : State
         base.Enter();
 
         _cooldown = Awaitable.WaitForSecondsAsync(_cooldownInSeconds);
-
-        // Projectile.Fire
-        // (
-        //     StateMachine.gameObject.GetComponent<Unit>(),
-        //     _laser ,
-        //     StateMachine.gameObject.transform.right * .5f + StateMachine.gameObject.transform.position, 
-        //     StateMachine.gameObject.transform.rotation,
-        //     1,
-        //     750f,
-        //     0.33f           
-        // );
-
         _weapon.Fire();
     }
 }

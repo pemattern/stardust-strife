@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class ShieldStabilizers : Upgrade
 {
     public override string Title { get; } = "Shield Stabilizers";
@@ -14,7 +10,7 @@ public class ShieldStabilizers : Upgrade
     {
         _shield = unit.GetComponent<Shield>();
     }
-    public override void OnAttach()
+    public override void OnInsert()
     { 
         _shield.AddMax(_max);
         _shield.AddRechargeDelay(_rechargeDelay);

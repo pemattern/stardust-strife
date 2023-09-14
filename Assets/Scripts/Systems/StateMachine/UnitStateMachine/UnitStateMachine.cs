@@ -24,8 +24,8 @@ public class UnitStateMachine : IndefiniteStateMachine
         {
             new MoveState(this),
             new BoostState(this, 5),
-            new FireState(this, WeaponContainer[0], true),
-            new FireState(this, WeaponContainer[1], false)
+            new FireState(this, WeaponContainer.Primary, true),
+            new FireState(this, WeaponContainer.Alternate, false)
         }, 0);
     }
 }

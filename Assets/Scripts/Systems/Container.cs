@@ -11,7 +11,7 @@ public class Container<T> : MonoBehaviour where T : IContainerItem
 
     public T this[int i] => _items[i];
 
-    void Start()
+    void OnEnable()
     {
         _unit = GetComponent<Unit>();
         _items = new List<T>();

@@ -1,9 +1,13 @@
 using UnityEngine;
 
-public abstract class Weapon : IContainerItem
+public abstract class Weapon
 {
-    [SerializeField] private ProjectileSettings _projectileSettings;
-    public WeaponSettings WeaponSettings;
+    public abstract GameObject ProjectilePrefab { get; protected set; }
+    public abstract GameObject WeaponPrefab { get; protected set; }
+    public abstract float ProjectileSpeed { get; protected set; }
+    public abstract float ProjectileDamage { get; protected set; }
+    public abstract float ProjectileLifetime { get; protected set; }
+    public abstract float WeaponCooldown { get; protected set; }
     private Unit _unit;
 
     public Weapon (Unit unit)
@@ -16,12 +20,12 @@ public abstract class Weapon : IContainerItem
         Projectile.Fire
         (
             _unit,
-            _projectileSettings.Prefab,
+            ProjectilePrefab,
             Vector3.zero,
             Quaternion.identity,
-            _projectileSettings.Damage,
-            _projectileSettings.Speed,
-            _projectileSettings.Lifetime
+            ProjectileDamage,
+            ProjectileSpeed,
+            ProjectileLifetime
         );
     }
 
