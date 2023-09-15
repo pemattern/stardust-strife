@@ -21,7 +21,7 @@ public class Weapon : MonoBehaviour
             _unit,
             _weaponSettings.ProjectileSettings.Prefab,
             transform.position,
-            transform.localRotation,
+            transform.rotation,
             _weaponSettings.ProjectileSettings.Damage,
             _weaponSettings.ProjectileSettings.Speed,
             _weaponSettings.ProjectileSettings.Lifetime
