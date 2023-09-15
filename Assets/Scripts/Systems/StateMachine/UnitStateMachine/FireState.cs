@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class FireState : State
 {
-    public override bool EntryCondition => _isPrimary ? _unitController.Fire : _unitController.AlternateFire;
+    public override bool EntryCondition => (_isPrimary ? _unitController.Fire : _unitController.AlternateFire) &&
+        (_weapon.RequiresLockOn ? EnemyManager.CurrentTarget != null : true);
     public override bool ExitCondition => _cooldown?.IsCompleted??false;
 
     private Awaitable _cooldown;

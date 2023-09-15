@@ -4,8 +4,6 @@ public class BoostState : State
 {
     public override bool EntryCondition => _unitController.Boost;
     public override bool ExitCondition => _cooldown.IsCompleted;
-
-    private bool _isToggle = false;
     private Awaitable _cooldown;
     private float _cooldownInSeconds;
     private IUnitController _unitController;

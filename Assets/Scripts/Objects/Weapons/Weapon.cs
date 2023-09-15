@@ -5,6 +5,7 @@ public class Weapon : MonoBehaviour
 {
     public bool IsPrimary => _isPrimary;
     public float Cooldown => _weaponSettings.Cooldown;
+    public bool RequiresLockOn => _weaponSettings.RequiresLockOn;
     private Unit _unit;
     [SerializeField] private WeaponSettings _weaponSettings;
     [SerializeField] private bool _isPrimary;
@@ -26,5 +27,10 @@ public class Weapon : MonoBehaviour
             _weaponSettings.ProjectileSettings.Speed,
             _weaponSettings.ProjectileSettings.Lifetime
         );
+    }
+
+    public virtual bool Locked()
+    {
+        return false;
     }
 }

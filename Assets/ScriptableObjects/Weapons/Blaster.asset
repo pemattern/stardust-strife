@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ProjectileSettings: {fileID: 11400000, guid: a8c44833a8eb9ac17914b41165f9b6ab, type: 2}
   Prefab: {fileID: 0}
-  Cooldown: 0.5
+  Cooldown: 0.2
+  RequiresLockOn: 0

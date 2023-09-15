@@ -6,4 +6,5 @@ public class WeaponSettings : ScriptableObject
     public ProjectileSettings ProjectileSettings;
     public GameObject Prefab;
     public float Cooldown;
+    public bool RequiresLockOn;
 }

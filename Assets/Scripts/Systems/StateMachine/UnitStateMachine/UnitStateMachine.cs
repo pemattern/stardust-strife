@@ -9,7 +9,6 @@ public class UnitStateMachine : IndefiniteStateMachine
     public UpgradeContainer UpgradeContainer { get; private set; }
     private Weapon _primaryWeapon;
     private Weapon _alternateWeapon;
-
     [SerializeField] private bool _isPlayer;
 
     void Start()
@@ -19,7 +18,6 @@ public class UnitStateMachine : IndefiniteStateMachine
         UpgradeContainer = GetComponent<UpgradeContainer>();
         
         Weapon[] weapons = GetComponents<Weapon>();
-        Debug.Log(weapons.Length);
         if (weapons.Length > 2) throw new System.Exception("Too many weapons equipped.");
         foreach (Weapon weapon in weapons)
         {
@@ -36,7 +34,7 @@ public class UnitStateMachine : IndefiniteStateMachine
             new FireState(this, _primaryWeapon, true)
         }, 0);
 
-        if (_alternateWeapon is not null)
+        if (_alternateWeapon != null)
             AddState(new FireState(this, _alternateWeapon, false));
     }
 }

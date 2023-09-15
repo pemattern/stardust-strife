@@ -4,7 +4,7 @@ using UnityEngine;
 public abstract class Stat : MonoBehaviour
 {
     public float Current { get; private set; }
-    public float Max { get ; private set; }
+    public float Max => _maxValue;
 
     public event Action Changed;
     public event Action Decreased;
@@ -18,12 +18,11 @@ public abstract class Stat : MonoBehaviour
     void Start()
     {
         Current = _maxValue;
-        Max = _maxValue;
     }
 
     public virtual void AddMax(float amount)
     {
-        Max += amount;
+        _maxValue += amount;
         Add(amount);
     }
 
@@ -31,7 +30,7 @@ public abstract class Stat : MonoBehaviour
     {
         float before = Current;
         Current += amount;
-        Current = Mathf.Clamp(Current, 0f, Max);
+        Current = Mathf.Clamp(Current, 0f, _maxValue);
         Changed?.Invoke();
 
         if (Current > before) Increased?.Invoke();
