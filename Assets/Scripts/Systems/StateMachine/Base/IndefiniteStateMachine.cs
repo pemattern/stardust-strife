@@ -2,7 +2,7 @@ public abstract class IndefiniteStateMachine : StateMachine
 {
     void Update()
     {
-        foreach (State state in States)
+        foreach (State state in _states)
         {
             if (state.EntryCondition && !state.IsActive)
                 EnterState(state);
@@ -18,7 +18,7 @@ public abstract class IndefiniteStateMachine : StateMachine
 
     void FixedUpdate()
     {
-        foreach (State state in States)
+        foreach (State state in _states)
         {
             if (!state.IsActive) continue;
 

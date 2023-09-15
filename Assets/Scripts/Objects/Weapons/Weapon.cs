@@ -1,18 +1,17 @@
 using UnityEngine;
 
-public abstract class Weapon
+[RequireComponent(typeof(Unit))]
+public class Weapon : MonoBehaviour
 {
-    public abstract GameObject ProjectilePrefab { get; protected set; }
-    public abstract GameObject WeaponPrefab { get; protected set; }
-    public abstract float ProjectileSpeed { get; protected set; }
-    public abstract float ProjectileDamage { get; protected set; }
-    public abstract float ProjectileLifetime { get; protected set; }
-    public abstract float WeaponCooldown { get; protected set; }
+    public bool IsPrimary => _isPrimary;
+    public float Cooldown => _weaponSettings.Cooldown;
     private Unit _unit;
+    [SerializeField] private WeaponSettings _weaponSettings;
+    [SerializeField] private bool _isPrimary;
 
-    public Weapon (Unit unit)
+    void Start()
     {
-        _unit = unit;
+        _unit = GetComponent<Unit>();
     }
 
     public void Fire()
@@ -20,16 +19,12 @@ public abstract class Weapon
         Projectile.Fire
         (
             _unit,
-            ProjectilePrefab,
-            Vector3.zero,
-            Quaternion.identity,
-            ProjectileDamage,
-            ProjectileSpeed,
-            ProjectileLifetime
+            _weaponSettings.ProjectileSettings.Prefab,
+            transform.position,
+            transform.localRotation,
+            _weaponSettings.ProjectileSettings.Damage,
+            _weaponSettings.ProjectileSettings.Speed,
+            _weaponSettings.ProjectileSettings.Lifetime
         );
     }
-
-    public virtual void OnInsert() { }
-    public virtual void OnRemove() { }
-    public virtual void OnUpdate() { }
 }

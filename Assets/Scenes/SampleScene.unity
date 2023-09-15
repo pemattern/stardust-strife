@@ -2088,6 +2088,7 @@ GameObject:
   - component: {fileID: 6838476252064400466}
   - component: {fileID: 6838476252064400463}
   - component: {fileID: 6838476252064400468}
+  - component: {fileID: 6838476252064400470}
   - component: {fileID: 6838476252064400469}
   m_Layer: 10
   m_Name: Spaceship
@@ -2306,6 +2307,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34271265f37f00d4ebe260835314c4ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PrimaryWeapon: {fileID: 0}
+  AlternateWeapon: {fileID: 0}
   _isPlayer: 1
   _laserPrefab: {fileID: 8627032766006318039, guid: 8040b1ad9cf96be45a448b4122d41267,
     type: 3}
@@ -2478,9 +2481,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 2352178504066862404}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c6a708dbdc2d10dda010b613c6a0888, type: 3}
+  m_Script: {fileID: 11500000, guid: dde003e3e937e8b78bd8602f22a0ff66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _weaponSettings: {fileID: 11400000, guid: f6a5e28cf17e9c8dc8f00db3c0b6d781, type: 2}
+  _isPrimary: 0
+--- !u!114 &6838476252064400470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2352178504066862404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dde003e3e937e8b78bd8602f22a0ff66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weaponSettings: {fileID: 11400000, guid: 62bcff8d64fab8af7a8db15172c38c40, type: 2}
+  _isPrimary: 1
 --- !u!4 &7851051575761762979
 Transform:
   m_ObjectHideFlags: 0

@@ -4,17 +4,18 @@ using UnityEngine;
 
 public abstract class StateMachine : MonoBehaviour
 {
-    public List<State> States { get; private set; } = new List<State>();
+    protected List<State> _states;
     public event Action<State> Entered;
     public event Action<State> Exited;
 
     protected virtual void Init(List<State> states, int entryStateIndex)
     {
+        _states = new List<State>();
         foreach (State state in states)
         {
-            States.Add(state);
+            _states.Add(state);
         }
-        States[entryStateIndex].Enter();
+        _states[entryStateIndex].Enter();
     }
 
     protected virtual void EnterState(State state)
@@ -27,5 +28,10 @@ public abstract class StateMachine : MonoBehaviour
     {
         Exited?.Invoke(state);
         state.Exit();
+    }
+
+    protected virtual void AddState(State state)
+    {
+        _states.Add(state);
     }
 }

@@ -9,7 +9,9 @@ public class Missile : Projectile
     {
         base.Start();
         _rigidbody = GetComponent<Rigidbody>();
-        _enemy = EnemyManager.CurrentTarget.transform;
+
+        if (EnemyManager.CurrentTarget is not null)
+            _enemy = EnemyManager.CurrentTarget.transform;
     }
 
     protected override void FixedUpdate()

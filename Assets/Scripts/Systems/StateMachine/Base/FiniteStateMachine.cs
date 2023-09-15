@@ -7,12 +7,12 @@ public abstract class FiniteStateMachine : StateMachine
     protected override void Init(List<State> states, int entryStateIndex)
     {
         base.Init(states, entryStateIndex);
-        CurrentState = States[entryStateIndex];
+        CurrentState = _states[entryStateIndex];
     }
 
     void Update()
     {
-        foreach (State state in States)
+        foreach (State state in _states)
         {
             if (state.EntryCondition && CurrentState.ExitCondition && !state.IsActive)
                 EnterState(state);
@@ -28,7 +28,7 @@ public abstract class FiniteStateMachine : StateMachine
 
     protected override void EnterState(State state)
     {
-        States.ForEach(x => ExitState(x));
+        _states.ForEach(x => ExitState(x));
         CurrentState = state;
         base.EnterState(state);
     }

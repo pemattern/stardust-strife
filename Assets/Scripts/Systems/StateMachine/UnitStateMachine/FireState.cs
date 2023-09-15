@@ -17,7 +17,7 @@ public class FireState : State
         _unitController = stateMachine.UnitController;
         _weapon = weapon;
         _isPrimary = isPrimary;
-        _cooldownInSeconds = weapon.WeaponCooldown;
+        _cooldownInSeconds = weapon.Cooldown;
     }
 
     public override void Enter()
