@@ -14,7 +14,6 @@ public class FocusingMarker : MonoBehaviour
     private EnemyUnit _attemptingToTarget;
     private Awaitable _focusingDurationAwaitable;
     private float _targetingCompletion;
-
     public static FocusingMarker Instance;
     void Awake()
     {

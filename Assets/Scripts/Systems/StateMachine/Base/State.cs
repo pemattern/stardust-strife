@@ -4,8 +4,7 @@ public abstract class State
 {
     public abstract bool EntryCondition { get; }
     public abstract bool ExitCondition { get; }
-
-    protected StateMachine StateMachine { get; private set; }
+    public StateMachine StateMachine { get; private set; }
     
     public bool IsActive { get; private set; }
     public event Action Entered;

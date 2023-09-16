@@ -1,23 +1,22 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
-public class TargetingStateMachince : FiniteStateMachine
+public class LockOnStateMachine : FiniteStateMachine
 {
     public float Radius, Speed, Duration;
     public float MinDistance, MaxDistance, MinSize, MaxSize;
-    public float Color TargetingColor, TargetAquiredColor;
+    public Color LockingOnColor, LockedOnColor;
+
+    [HideInInspector] public float LockOnCompletion;
+    [HideInInspector] public EnemyUnit Target;
+
     private Image _image;
     private RectTransform _rectTransform;
-    private EnemyUnit _currentTarget;
-    private EnemyUnit _attemptingToTarget;
     private Awaitable _focusingDurationAwaitable;
-    private float _targetingCompletion;
 
-    public static FocusingMarker Instance;
 
     void Start()
     {
@@ -26,7 +25,7 @@ public class TargetingStateMachince : FiniteStateMachine
             new List<State>()
             {
                 new NoTargetState(this),
-                new IncrementTargetState(this)
+                new LockingOnState(this)
             },
         0);
     }
