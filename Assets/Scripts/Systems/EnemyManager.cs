@@ -33,7 +33,7 @@ public class EnemyManager : MonoBehaviour
     void Remove(Unit enemy)
     {
         Enemies.Remove((EnemyUnit)enemy);
-        GameObject.Destroy(enemy.gameObject);
+        Destroy(enemy.gameObject);
         FocusingMarker.Reset();
     }
 

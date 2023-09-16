@@ -21,7 +21,6 @@ public abstract class State
 
     public virtual void Enter()
     {
-        //Debug.Log($"Entered State: {this.ToString()}");
         IsActive = true;
         Entered?.Invoke();
     }
@@ -37,7 +36,6 @@ public abstract class State
 
     public virtual void Exit()
     {
-        //Debug.Log($"Exited State: {this.ToString()}");
         IsActive = false;
         Exited?.Invoke();
     }

@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
- [RequireComponent(typeof(Image))]
+[RequireComponent(typeof(Image))]
 public class FocusingMarker : MonoBehaviour
 {
     [SerializeField] private float _focusingRadius, _focusingSpeed, _focusingDuration;
