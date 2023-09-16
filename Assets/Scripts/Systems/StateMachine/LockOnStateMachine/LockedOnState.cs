@@ -6,7 +6,6 @@ public class LockedOnState : State
         OutOfViewport(Camera.main.WorldToViewportPoint(_lockOnStateMachine.Target.transform.position));
 
     private LockOnStateMachine _lockOnStateMachine;
-    private float _lockOnCompletion;
     public LockedOnState(LockOnStateMachine lockOnStateMachine) : base(lockOnStateMachine)
     {
         _lockOnStateMachine = lockOnStateMachine;
@@ -15,12 +14,8 @@ public class LockedOnState : State
     public override void Enter()
     {
         base.Enter();
-        _lockOnCompletion = 0f;
-    }
-
-    public override void Update()
-    {
-        base.Update();
+        _lockOnStateMachine.Image.color = _lockOnStateMachine.LockedOnColor;
+        _lockOnStateMachine.Image.fillAmount = 1f;
     }
 
     bool OutOfViewport(Vector3 viewportPos)

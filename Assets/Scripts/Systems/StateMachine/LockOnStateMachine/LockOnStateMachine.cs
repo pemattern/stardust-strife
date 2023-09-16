@@ -12,14 +12,16 @@ public class LockOnStateMachine : FiniteStateMachine
 
     [HideInInspector] public float LockOnCompletion;
     [HideInInspector] public EnemyUnit Target;
-
-    private Image _image;
-    private RectTransform _rectTransform;
-    private Awaitable _focusingDurationAwaitable;
-
+    [HideInInspector] public Image Image;
+    [HideInInspector] public RectTransform RectTransform;
 
     void Start()
     {
+        Image = GetComponent<Image>();
+        Image.enabled = false;
+
+        RectTransform = GetComponent<RectTransform>();
+
         Init
         (
             new List<State>()

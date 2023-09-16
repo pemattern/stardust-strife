@@ -111,8 +111,6 @@ public class FocusingMarker : MonoBehaviour
                     winnerDistance = distance;
                     enemyUnit = enemy;
                 }
-
-                
             }
         }
 

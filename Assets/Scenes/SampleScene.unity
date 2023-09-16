@@ -1214,8 +1214,9 @@ GameObject:
   - component: {fileID: 1273933772}
   - component: {fileID: 1273933771}
   - component: {fileID: 1273933770}
+  - component: {fileID: 1273933773}
   m_Layer: 0
-  m_Name: Focusing Marker
+  m_Name: Targeting Marker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1247,7 +1248,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1273933768}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b07b6153820dec640af81fec7051fe0a, type: 3}
   m_Name: 
@@ -1299,6 +1300,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1273933768}
   m_CullTransparentMesh: 1
+--- !u!114 &1273933773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273933768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0349f6e77234f21d3a0c1030800f0cdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Radius: 0.2
+  Speed: 0.5
+  Duration: 5
+  MinDistance: 0
+  MaxDistance: 200
+  MinSize: 32
+  MaxSize: 128
+  LockingOnColor: {r: 0.8301887, g: 0.5208259, b: 0.5208259, a: 1}
+  LockedOnColor: {r: 0.5853793, g: 0.779883, b: 0.5997025, a: 1}
+  LockOnCompletion: 0
+  Target: {fileID: 0}
+  Image: {fileID: 0}
+  RectTransform: {fileID: 0}
 --- !u!1 &1347360986
 GameObject:
   m_ObjectHideFlags: 0
@@ -2307,13 +2333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34271265f37f00d4ebe260835314c4ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PrimaryWeapon: {fileID: 0}
-  AlternateWeapon: {fileID: 0}
   _isPlayer: 1
-  _laserPrefab: {fileID: 8627032766006318039, guid: 8040b1ad9cf96be45a448b4122d41267,
-    type: 3}
-  _missilePrefab: {fileID: 2886892660322038273, guid: 68d2cb2b55751a343b30eca7eaef6baa,
-    type: 3}
 --- !u!23 &6042002015521270002
 MeshRenderer:
   m_ObjectHideFlags: 0
