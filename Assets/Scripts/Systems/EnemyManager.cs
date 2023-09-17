@@ -5,7 +5,7 @@ public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private GameObject _enemyPrefab;
     [SerializeField] private int _startingEnemies;
-
+    [SerializeField] private LockOnStateMachine _lockOnStateMachine;
     public static List<EnemyUnit> Enemies { get; private set; } = new List<EnemyUnit>();
     public static EnemyUnit CurrentTarget { get; private set;}
 
@@ -34,11 +34,5 @@ public class EnemyManager : MonoBehaviour
     {
         Enemies.Remove((EnemyUnit)enemy);
         Destroy(enemy.gameObject);
-        LockOnStateMachine.Reset();
-    }
-
-    public static void SetTargetEnemy(EnemyUnit enemy)
-    {
-        CurrentTarget = enemy;
     }
 }

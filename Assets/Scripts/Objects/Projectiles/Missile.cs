@@ -3,24 +3,24 @@ using UnityEngine;
 public class Missile : Projectile
 {
     private Rigidbody _rigidbody;
-    private Transform _enemy;
+    private Rigidbody _targetRigidbody;
 
     protected override void Start()
     {
         base.Start();
         _rigidbody = GetComponent<Rigidbody>();
 
-        if (EnemyManager.CurrentTarget is not null)
-            _enemy = EnemyManager.CurrentTarget.transform;
+        if (Target is not null)
+            _targetRigidbody = Target.GetComponent<Rigidbody>();
     }
 
     protected override void FixedUpdate()
     {
         _rigidbody.velocity = transform.forward * Speed;
 
-        if (_enemy is null) return;
+        if (Target is null) return;
 
-        Vector3 heading = _enemy.GetComponent<Rigidbody>().position - transform.position;
+        Vector3 heading = _targetRigidbody.position - transform.position;
         Quaternion rotation = Quaternion.LookRotation(heading);
         _rigidbody.MoveRotation(Quaternion.RotateTowards(transform.rotation, rotation, 4.2f));
     }

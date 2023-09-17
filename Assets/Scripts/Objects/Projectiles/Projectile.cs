@@ -7,6 +7,7 @@ public abstract class Projectile : MonoBehaviour
     protected float Damage { get; private set; }
     protected Awaitable Lifetime { get; private set; }
     protected Unit ShotBy { get; private set; }
+    protected Unit Target {get; private set;}
 
     [SerializeField] protected GameObject _vfxDamaged;
 
@@ -39,12 +40,13 @@ public abstract class Projectile : MonoBehaviour
         }
     }
 
-    public static void Fire(Unit shotBy, GameObject prefab, Vector3 position, Quaternion rotation, float damage, float speed, float lifetime)
+    public static void Fire(Unit shotBy, Unit target, GameObject prefab, Vector3 position, Quaternion rotation, float damage, float speed, float lifetime)
     {
         Projectile projectile = Instantiate(prefab, position, rotation).GetComponent<Projectile>();
         projectile.Damage = damage;
         projectile.ShotBy = shotBy;
         projectile.Speed = speed;
         projectile.LifetimeInSeconds = lifetime;
+        projectile.Target = target;
     }
 }

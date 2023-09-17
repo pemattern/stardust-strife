@@ -477,6 +477,7 @@ MonoBehaviour:
   _enemyPrefab: {fileID: 1851480978123181590, guid: fdce125fb953a80428fd45f66a750829,
     type: 3}
   _startingEnemies: 3
+  _lockOnStateMachine: {fileID: 1273933773}
 --- !u!4 &450667498
 Transform:
   m_ObjectHideFlags: 0
@@ -1291,6 +1292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0349f6e77234f21d3a0c1030800f0cdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player: {fileID: 6838476252064400462}
   Radius: 0.2
   Speed: 0.5
   MinDistance: 0
@@ -1299,6 +1301,7 @@ MonoBehaviour:
   MaxSize: 128
   LockingOnColor: {r: 0.8301887, g: 0.5208259, b: 0.5208259, a: 1}
   LockedOnColor: {r: 0.5853793, g: 0.779883, b: 0.5997025, a: 1}
+  LockingComplete: 0
 --- !u!1 &1347360986
 GameObject:
   m_ObjectHideFlags: 0
@@ -2478,6 +2481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde003e3e937e8b78bd8602f22a0ff66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Locked: 0
   _weaponSettings: {fileID: 11400000, guid: f6a5e28cf17e9c8dc8f00db3c0b6d781, type: 2}
   _isPrimary: 0
 --- !u!114 &6838476252064400470
@@ -2492,6 +2496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde003e3e937e8b78bd8602f22a0ff66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Locked: 0
   _weaponSettings: {fileID: 11400000, guid: 62bcff8d64fab8af7a8db15172c38c40, type: 2}
   _isPrimary: 1
 --- !u!4 &7851051575761762979

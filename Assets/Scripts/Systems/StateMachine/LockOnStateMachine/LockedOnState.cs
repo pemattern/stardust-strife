@@ -1,13 +1,19 @@
 using UnityEngine;
 public class LockedOnState : State
 {
-    public override bool EntryCondition => EnemyManager.CurrentTarget != null;
-    public override bool ExitCondition => EnemyManager.CurrentTarget == null;
-
+    public override bool EntryCondition => _lockOnStateMachine.LockingComplete == true &&
+        _lockOnStateMachine.Target != null;
+    public override bool ExitCondition => !EntryCondition;
     private LockOnStateMachine _lockOnStateMachine;
     public LockedOnState(LockOnStateMachine lockOnStateMachine) : base(lockOnStateMachine)
     {
         _lockOnStateMachine = lockOnStateMachine;
+    }
+
+    public override void Enter()
+    {
+        base.Enter();
+        _lockOnStateMachine.SetWeaponLockState(false);
     }
 
     public override void Update()
@@ -15,25 +21,7 @@ public class LockedOnState : State
         base.Update();
         _lockOnStateMachine.UpdateMarker(1f);
 
-        if (OutOfViewport(Camera.main.WorldToViewportPoint(EnemyManager.CurrentTarget.transform.position)))
-        {
-            EnemyManager.SetTargetEnemy(null);
-            _lockOnStateMachine.RemoveTarget();
-        }
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
-        _lockOnStateMachine.DisableMarker();
-    }
-
-    bool OutOfViewport(Vector3 viewportPos)
-    {
-        return viewportPos.x < 0f ||
-            viewportPos.x > 1f ||
-            viewportPos.y < 0f ||
-            viewportPos.y > 1f ||
-            viewportPos.z < _lockOnStateMachine.MinDistance;
+        if (_lockOnStateMachine.OutOfViewport(Camera.main.WorldToViewportPoint(_lockOnStateMachine.Target.transform.position)))
+            _lockOnStateMachine.Reset(_lockOnStateMachine.Target);
     }
 }

@@ -3,6 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Unit))]
 public class Weapon : MonoBehaviour
 {
+    public bool Locked;
     public bool IsPrimary => _isPrimary;
     public float Cooldown => _weaponSettings.Cooldown;
     public bool RequiresLockOn => _weaponSettings.RequiresLockOn;
@@ -13,13 +14,17 @@ public class Weapon : MonoBehaviour
     void Start()
     {
         _unit = GetComponent<Unit>();
+
+        if (RequiresLockOn) Locked = true;
+        else Locked = false;
     }
 
-    public void Fire()
+    public void Fire(Unit target = null)
     {
         Projectile.Fire
         (
             _unit,
+            target,
             _weaponSettings.ProjectileSettings.Prefab,
             transform.position,
             transform.rotation,
@@ -27,10 +32,5 @@ public class Weapon : MonoBehaviour
             _weaponSettings.ProjectileSettings.Speed,
             _weaponSettings.ProjectileSettings.Lifetime
         );
-    }
-
-    public virtual bool Locked()
-    {
-        return false;
     }
 }

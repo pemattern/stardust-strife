@@ -1,32 +1,32 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 [RequireComponent(typeof(Image), typeof(RectTransform))]
-public class LockOnStateMachine : FiniteStateMachine
+public class LockOnStateMachine : FiniteStateMachine, ITargetProvider
 {
-    public static LockOnStateMachine Instance;
+    public Unit Player;
     public float Radius, Speed;
     public float MinDistance, MaxDistance, MinSize, MaxSize;
     public Color LockingOnColor, LockedOnColor;
-    public EnemyUnit Target => _target;
-    private EnemyUnit _target;
+    public Unit Target => _target;
+    private Unit _target;
     private Image _image;
     private RectTransform _rectTransform;
-
-    void Awake()
-    {
-        Instance = this;
-    }
-
+    private List<Weapon> _weapons;
+    [HideInInspector] public bool LockingComplete;
     void Start()
     {
         _image = GetComponent<Image>();
         _image.enabled = false;
 
         _rectTransform = GetComponent<RectTransform>();
+
+        Weapon[] weapons = Player.GetComponents<Weapon>();
+        _weapons = weapons.Where(x => x.RequiresLockOn == true).ToList();
+
+        LockingComplete = false;
 
         Init
         (
@@ -39,19 +39,13 @@ public class LockOnStateMachine : FiniteStateMachine
         0);
     }
 
-    public void RemoveTarget() 
+    public void Reset(Unit unit)
     {
         _target = null;
-    }
-
-    public void DisableMarker()
-    {
         _image.enabled = false;
-    }
-    public static void Reset()
-    {
-        Instance._target = null;
-        EnemyManager.SetTargetEnemy(null);
+        unit.Destroyed -= Reset;
+        LockingComplete = false;
+        SetWeaponLockState(true);
     }
 
     public void SetTarget()
@@ -73,6 +67,20 @@ public class LockOnStateMachine : FiniteStateMachine
             }
         }
         _target = enemyUnit;      
+    }
+
+    public void SetWeaponLockState(bool locked)
+    {
+        _weapons.ForEach(x => x.Locked = locked);
+    }
+
+    public bool OutOfViewport(Vector3 viewportPos)
+    {
+        return viewportPos.x < 0f ||
+            viewportPos.x > 1f ||
+            viewportPos.y < 0f ||
+            viewportPos.y > 1f ||
+            viewportPos.z < MinDistance;
     }
 
     bool WithinCenteredRadius(Vector3 viewportPos)

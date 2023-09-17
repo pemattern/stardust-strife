@@ -1,8 +1,7 @@
-using UnityEngine.UI;
 using UnityEngine;
 public class LockingOnState : State
 {
-    public override bool EntryCondition => EnemyManager.CurrentTarget == null && _lockOnStateMachine.Target != null;
+    public override bool EntryCondition => _lockOnStateMachine.LockingComplete == false && _lockOnStateMachine.Target != null;
     public override bool ExitCondition => _lockOnCompletion >= 1f || _lockOnStateMachine.Target == null;
     private LockOnStateMachine _lockOnStateMachine;
     private float _lockOnCompletion;
@@ -25,6 +24,9 @@ public class LockingOnState : State
         _lockOnStateMachine.UpdateMarker(_lockOnCompletion);
 
         if (_lockOnCompletion >= 1f)
-            EnemyManager.SetTargetEnemy(_lockOnStateMachine.Target);
+            _lockOnStateMachine.LockingComplete = true;
+
+        if (_lockOnStateMachine.OutOfViewport(Camera.main.WorldToViewportPoint(_lockOnStateMachine.Target.transform.position)))
+            _lockOnStateMachine.Reset(_lockOnStateMachine.Target);
     }
 }

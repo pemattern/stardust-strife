@@ -1,7 +1,9 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Health))]
 public class Shield : Stat
 {
+    private Health _health;
     private float _lastTimeDamaged;
     [SerializeField] private float _rechargeDelay, _rechargeSpeed, _shieldScale;
     [SerializeField] private Material _shieldMaterial;
@@ -18,9 +20,13 @@ public class Shield : Stat
     }
     void Start()
     {
+        _health = GetComponent<Health>();
+
         Decreased += ShieldDamaged;
         ReachedZero += ShieldDestroyed;
         Increased += ShieldReactivated;
+        Overkill += _health.Add;
+
         _shieldObject = CreateShieldObject();
     }
 
@@ -71,5 +77,6 @@ public class Shield : Stat
         Decreased -= ShieldDamaged;
         ReachedZero -= ShieldDestroyed;
         Increased -= ShieldReactivated;
+        Overflow -= _health.Add;
     }
 }
