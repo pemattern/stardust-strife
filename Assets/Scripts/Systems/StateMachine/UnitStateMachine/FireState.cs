@@ -18,7 +18,7 @@ public class FireState : State
         _weapon = weapon;
         _isPrimary = isPrimary;
         _cooldownInSeconds = weapon.Cooldown;
-        _targetProvider = ((UnitStateMachine)StateMachine).TargetProvider;
+        _targetProvider = stateMachine.TargetProvider;
     }
 
     public override void Enter()
