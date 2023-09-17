@@ -476,6 +476,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPrefab: {fileID: 1851480978123181590, guid: fdce125fb953a80428fd45f66a750829,
     type: 3}
+  _startingEnemies: 3
 --- !u!4 &450667498
 Transform:
   m_ObjectHideFlags: 0
@@ -1321,10 +1322,6 @@ MonoBehaviour:
   MaxSize: 128
   LockingOnColor: {r: 0.8301887, g: 0.5208259, b: 0.5208259, a: 1}
   LockedOnColor: {r: 0.5853793, g: 0.779883, b: 0.5997025, a: 1}
-  LockOnCompletion: 0
-  Target: {fileID: 0}
-  Image: {fileID: 0}
-  RectTransform: {fileID: 0}
 --- !u!1 &1347360986
 GameObject:
   m_ObjectHideFlags: 0
@@ -1432,7 +1429,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1448489250
 MonoBehaviour:
   m_ObjectHideFlags: 0

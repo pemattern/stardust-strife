@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 public abstract class State
 {
@@ -20,6 +21,8 @@ public abstract class State
 
     public virtual void Enter()
     {
+        if (StateMachine is LockOnStateMachine)
+            Debug.Log("Entered: " + GetType().ToString());
         IsActive = true;
         Entered?.Invoke();
     }
@@ -35,6 +38,8 @@ public abstract class State
 
     public virtual void Exit()
     {
+        if (StateMachine is LockOnStateMachine)
+            Debug.Log("Exited: " + GetType().ToString());
         IsActive = false;
         Exited?.Invoke();
     }

@@ -2,8 +2,7 @@ using UnityEngine;
 public class LockedOnState : State
 {
     public override bool EntryCondition => EnemyManager.CurrentTarget != null;
-    public override bool ExitCondition => EnemyManager.CurrentTarget == null ||
-        OutOfViewport(Camera.main.WorldToViewportPoint(_lockOnStateMachine.Target.transform.position));
+    public override bool ExitCondition => EnemyManager.CurrentTarget == null;
 
     private LockOnStateMachine _lockOnStateMachine;
     public LockedOnState(LockOnStateMachine lockOnStateMachine) : base(lockOnStateMachine)
@@ -11,11 +10,16 @@ public class LockedOnState : State
         _lockOnStateMachine = lockOnStateMachine;
     }
 
-    public override void Enter()
+    public override void Update()
     {
-        base.Enter();
-        _lockOnStateMachine.Image.color = _lockOnStateMachine.LockedOnColor;
-        _lockOnStateMachine.Image.fillAmount = 1f;
+        base.Update();
+        _lockOnStateMachine.UpdateMarker(1f);
+
+        if (OutOfViewport(Camera.main.WorldToViewportPoint(EnemyManager.CurrentTarget.transform.position)))
+        {
+            EnemyManager.SetTargetEnemy(null);
+            _lockOnStateMachine.RemoveTarget();
+        }
     }
 
     bool OutOfViewport(Vector3 viewportPos)

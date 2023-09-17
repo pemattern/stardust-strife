@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private GameObject _enemyPrefab;
-    private int _startingEnemies = 10;
+    [SerializeField] private int _startingEnemies;
 
     public static List<EnemyUnit> Enemies { get; private set; } = new List<EnemyUnit>();
     public static EnemyUnit CurrentTarget { get; private set;}

@@ -28,7 +28,7 @@ public abstract class FiniteStateMachine : StateMachine
 
     protected override void EnterState(State state)
     {
-        _states.ForEach(x => ExitState(x));
+        CurrentState.Exit();
         CurrentState = state;
         base.EnterState(state);
     }

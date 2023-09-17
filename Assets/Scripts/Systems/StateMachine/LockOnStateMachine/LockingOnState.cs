@@ -1,3 +1,4 @@
+using UnityEngine.UI;
 using UnityEngine;
 public class LockingOnState : State
 {
@@ -14,16 +15,14 @@ public class LockingOnState : State
     {
         base.Enter();
         _lockOnCompletion = 0f;
-        _lockOnStateMachine.Image.color = _lockOnStateMachine.LockingOnColor;
     }
 
     public override void Update()
     {
         base.Update();
         _lockOnCompletion += _lockOnStateMachine.Speed * Time.deltaTime;
-        _lockOnCompletion /= _lockOnStateMachine.Duration;
 
-        _lockOnStateMachine.Image.fillAmount = _lockOnCompletion;
+        _lockOnStateMachine.UpdateMarker(_lockOnCompletion);
 
         if (_lockOnCompletion >= 1f)
             EnemyManager.SetTargetEnemy(_lockOnStateMachine.Target);

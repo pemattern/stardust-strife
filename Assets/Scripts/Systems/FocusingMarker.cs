@@ -90,7 +90,7 @@ public class FocusingMarker : MonoBehaviour
 
     Vector2 GetMarkerSize(float distance)
     {
-        float t = distance / (_maxDistance);
+        float t = distance / _maxDistance;
         float size = Mathf.Lerp(_maxSize, _minSize, t);
         return new Vector2(size, size);
     }
