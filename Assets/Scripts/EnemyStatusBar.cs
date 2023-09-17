@@ -40,6 +40,6 @@ public class EnemyStatusBar : MonoBehaviour
     void Dispose(Unit unit)
     {
         _enemy.Destroyed -= Dispose;
-        Destroy(this);
+        Destroy(gameObject);
     }
 }

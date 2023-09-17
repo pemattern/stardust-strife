@@ -33,7 +33,8 @@ public abstract class Stat : MonoBehaviour
         float before = Current;
         Current += amount;
         Current = Mathf.Clamp(Current, 0f, _maxValue);
-        Changed?.Invoke();
+        
+        if (amount != 0f) Changed?.Invoke();
 
         float overkill = before + amount;
         float overflow = before + amount - _maxValue;
