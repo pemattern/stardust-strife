@@ -1,18 +1,25 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Image), typeof(RectTransform))]
 public class LockOnStateMachine : FiniteStateMachine
 {
-    public float Radius, Speed, Duration;
+    public static LockOnStateMachine Instance;
+    public float Radius, Speed;
     public float MinDistance, MaxDistance, MinSize, MaxSize;
     public Color LockingOnColor, LockedOnColor;
     public EnemyUnit Target => _target;
     private EnemyUnit _target;
     private Image _image;
     private RectTransform _rectTransform;
+
+    void Awake()
+    {
+        Instance = this;
+    }
 
     void Start()
     {
@@ -32,7 +39,20 @@ public class LockOnStateMachine : FiniteStateMachine
         0);
     }
 
-    public void RemoveTarget() => _target = null;
+    public void RemoveTarget() 
+    {
+        _target = null;
+    }
+
+    public void DisableMarker()
+    {
+        _image.enabled = false;
+    }
+    public static void Reset()
+    {
+        Instance._target = null;
+        EnemyManager.SetTargetEnemy(null);
+    }
 
     public void SetTarget()
     {

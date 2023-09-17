@@ -34,7 +34,7 @@ public class EnemyManager : MonoBehaviour
     {
         Enemies.Remove((EnemyUnit)enemy);
         Destroy(enemy.gameObject);
-        FocusingMarker.Reset();
+        LockOnStateMachine.Reset();
     }
 
     public static void SetTargetEnemy(EnemyUnit enemy)

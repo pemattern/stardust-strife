@@ -22,6 +22,12 @@ public class LockedOnState : State
         }
     }
 
+    public override void Exit()
+    {
+        base.Exit();
+        _lockOnStateMachine.DisableMarker();
+    }
+
     bool OutOfViewport(Vector3 viewportPos)
     {
         return viewportPos.x < 0f ||
