@@ -9,6 +9,7 @@ public abstract class Unit : MonoBehaviour
     [HideInInspector] public Health Health;
     [HideInInspector] public Shield Shield;
     public event Action<Unit> Destroyed;
+    public event Action Hit;
     public int XPOnKill { get; private set; } = 20;
 
     protected virtual void OnEnable()
@@ -22,6 +23,7 @@ public abstract class Unit : MonoBehaviour
     {
         if (Shield.Current == 0f) Health.Add(-amount);
         else Shield.Add(-amount);
+        Hit?.Invoke();
     }
 
     private void UnitDestroyed()

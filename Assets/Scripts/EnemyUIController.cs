@@ -17,21 +17,4 @@ public class EnemyUIController : MonoBehaviour
             _enemyBars.Add(enemy, bar);
         }
     }
-    void Update()
-    {
-        foreach(EnemyUnit enemy in EnemyManager.Enemies)
-        {
-            bool onScreen = !OutOfViewport(Camera.main.WorldToViewportPoint(enemy.transform.position));
-            _enemyBars[enemy].gameObject.SetActive(onScreen);
-        }
-    }
-
-    public bool OutOfViewport(Vector3 viewportPos)
-    {
-        return viewportPos.x < 0f ||
-            viewportPos.x > 1f ||
-            viewportPos.y < 0f ||
-            viewportPos.y > 1f ||
-            viewportPos.z < 0f;
-    }
 }
