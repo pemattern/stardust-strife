@@ -476,7 +476,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPrefab: {fileID: 1851480978123181590, guid: fdce125fb953a80428fd45f66a750829,
     type: 3}
-  _startingEnemies: 3
+  _startingEnemies: 7
   _lockOnStateMachine: {fileID: 1273933773}
 --- !u!4 &450667498
 Transform:
@@ -1783,7 +1783,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyStatusBarPrefab: {fileID: 5608785789008778831, guid: 33aee36e46ab25fbda605da8998c7699,
     type: 3}
-  _centerRadius: 0.1
 --- !u!1 &2017081615
 GameObject:
   m_ObjectHideFlags: 0
@@ -2492,8 +2491,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxValue: 1
-  _rechargeDelay: 2
-  _rechargeSpeed: 1
+  _rechargeDelay: 5
+  _rechargeSpeed: 0.5
   _shieldScale: 1.1
   _shieldMaterial: {fileID: 2100000, guid: 685d69c56ed1bde4e9b412ac12478c0c, type: 2}
 --- !u!114 &6838476252064400467
@@ -2508,7 +2507,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a2c2ed5053163044b7d9b2674dc7187, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxValue: 10
+  _maxValue: 4
 --- !u!114 &6838476252064400468
 MonoBehaviour:
   m_ObjectHideFlags: 0

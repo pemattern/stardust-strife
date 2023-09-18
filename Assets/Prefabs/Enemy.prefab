@@ -361,5 +361,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde003e3e937e8b78bd8602f22a0ff66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Locked: 0
   _weaponSettings: {fileID: 11400000, guid: 62bcff8d64fab8af7a8db15172c38c40, type: 2}
   _isPrimary: 1

@@ -24,7 +24,7 @@ public class AIRepositionState : State
         _aiController.GetMovement += Thrust;
         _aiController.GetFire += DontFire;
 
-        _target = Random.insideUnitSphere * 200;
+        _target = _playerTransform.position + Random.insideUnitSphere * 400;
     }
 
     public Vector3 TargetFarPosition(Vector3 prediction)

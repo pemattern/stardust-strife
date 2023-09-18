@@ -21,6 +21,7 @@ public abstract class State
 
     public virtual void Enter()
     {
+        if (StateMachine is AIStateMachine) Debug.Log("Entered: " + GetType());
         IsActive = true;
         Entered?.Invoke();
     }
@@ -36,6 +37,7 @@ public abstract class State
 
     public virtual void Exit()
     {
+        if (StateMachine is AIStateMachine) Debug.Log("Exited: " + GetType());
         IsActive = false;
         Exited?.Invoke();
     }

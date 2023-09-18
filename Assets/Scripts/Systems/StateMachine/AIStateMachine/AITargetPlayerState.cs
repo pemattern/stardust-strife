@@ -6,7 +6,8 @@ public class AITargetPlayerState : State
     private AIController _aiController;
     private Transform _playerTransform;
     private Transform _transform;
-    private Task _task;
+
+    private Awaitable _minimumDwellTime;
 
     public AITargetPlayerState(StateMachine stateMachine, AIController aiController, Transform playerTransform) : base(stateMachine)
     { 
@@ -16,7 +17,7 @@ public class AITargetPlayerState : State
     }
 
     public override bool EntryCondition => Vector3.Distance(_transform.position, _playerTransform.position) < 500;
-    public override bool ExitCondition => _task.IsCompleted;
+    public override bool ExitCondition => _minimumDwellTime.IsCompleted;
 
     public override void Enter()
     {
@@ -24,16 +25,17 @@ public class AITargetPlayerState : State
         _aiController.GetRotation += TargetPlayer;
         _aiController.GetMovement += Thrust;
         _aiController.GetFire += Fire;
-        _task = Task.Delay(Random.Range(8000, 10000));
+
+        _minimumDwellTime = Awaitable.WaitForSecondsAsync(8f);
     }
 
     private Vector3 TargetPlayer(Vector3 prediction)
     {
-        float pitch = -Vector3.Dot(prediction, _transform.up);
-        float yaw = Vector3.Dot(prediction, _transform.right);
+        float pitch = Mathf.Sign(-Vector3.Dot(prediction, _transform.up));
+        float yaw = Mathf.Sign(Vector3.Dot(prediction, _transform.right));
 
         float rollAdjustment = Vector3.Dot(prediction, _transform.forward);
-        float roll = (Vector3.Dot(prediction, _transform.forward) < 0.9f) ? Mathf.Sign(rollAdjustment) * 1f : 0f;
+        float roll = (Vector3.Dot(prediction, _transform.forward) < 0.9f) ? Mathf.Sign(rollAdjustment) : 0f;
         return new Vector3(pitch, yaw, roll);
     }
 
