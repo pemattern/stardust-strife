@@ -11,9 +11,14 @@ public class PlayerUnit : Unit
         XP = GetComponent<XP>();
     }
 
+    private void Update()
+    {
+        Crosshair.Refresh(transform.position, transform.forward, 500f, 0.5f);
+    }
+
     public override void TakeDamage(float amount)
     {
         base.TakeDamage(amount);
-        //Camera.main.Shake(0.7f, 3, 3, Ease.CubeOut);
+        //Camera.main.Shake(1f, 0.2f, 0.4f, Ease.CubeOut);
     }
 }

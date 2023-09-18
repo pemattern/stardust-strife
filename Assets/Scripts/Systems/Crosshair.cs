@@ -17,7 +17,7 @@ public class Crosshair : MonoBehaviour
         _rectTransform = GetComponent<RectTransform>();
     }
 
-    public static void UpdateCrosshair(Vector3 playerPosition, Vector3 lookDirection, float projectileSpeed, float projectileLifetime)
+    public static void Refresh(Vector3 playerPosition, Vector3 lookDirection, float projectileSpeed, float projectileLifetime)
     {
         Vector3 projectileVector = lookDirection * projectileSpeed * projectileLifetime;
 

@@ -17,16 +17,14 @@ public class MoveState : State
     public override void Update()
     {
         base.Update();
-        if (StateMachine.gameObject.name == "Spaceship")
-            Crosshair.UpdateCrosshair(StateMachine.gameObject.transform.position, StateMachine.gameObject.transform.forward, 500f, 0.5f);
-    
-        _rigidbody.velocity = Vector3.ClampMagnitude(_rigidbody.velocity, 50f);
+
+        _rigidbody.velocity = Vector3.ClampMagnitude(_rigidbody.velocity, 25f);
     }
 
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        _rigidbody.AddRelativeForce(_unitController.Movement * 100f, ForceMode.Acceleration);
-        _rigidbody.AddRelativeTorque(_unitController.Rotation * 2f, ForceMode.Acceleration);
+        _rigidbody.AddRelativeForce(_unitController.Movement * 50f, ForceMode.Acceleration);
+        _rigidbody.AddRelativeTorque(_unitController.Rotation * 1f, ForceMode.Acceleration);
     }
 }
