@@ -25,7 +25,7 @@ public abstract class Stat : MonoBehaviour
     public virtual void AddMax(float amount)
     {
         _maxValue += amount;
-        Add(amount);
+        Current += amount;
     }
 
     public virtual void Add(float amount)

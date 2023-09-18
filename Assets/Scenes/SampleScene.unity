@@ -1639,7 +1639,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetTransform: {fileID: 7851051575761762979}
   _speed: 300
-  smoothTime: 0.036
+  smoothTime: 0.04
   _speedRotation: 300
 --- !u!4 &1814201662
 Transform:
