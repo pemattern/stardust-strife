@@ -169,6 +169,7 @@ MonoBehaviour:
   _shieldBar: {fileID: 8518259391921913180}
   _secondsDisplayed: 6
   _centerRadius: 0.1
+  _offset: {x: 0, y: 0.03}
 --- !u!1 &6598773987551120916
 GameObject:
   m_ObjectHideFlags: 0

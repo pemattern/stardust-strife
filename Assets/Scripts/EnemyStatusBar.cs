@@ -10,6 +10,7 @@ public class EnemyStatusBar : MonoBehaviour
     [SerializeField] private Image _shieldBar;
     [SerializeField] private float _secondsDisplayed;
     [SerializeField] private float _centerRadius;
+    [SerializeField] private Vector2 _offset;
     private EnemyUnit _enemy;
     private RectTransform _rectTransform;
     private Awaitable _displayAwaitable;
@@ -32,15 +33,21 @@ public class EnemyStatusBar : MonoBehaviour
 
     private void Update()
     {
-        _rectTransform.anchoredPosition = Camera.main.WorldToScreenPoint(_enemy.transform.position);
+        _rectTransform.anchoredPosition = GetPosition();
         _healthBar.fillAmount = _health.Normalized;
         _shieldBar.fillAmount = _shield.Normalized;
 
-        _background.enabled = !_displayAwaitable.IsCompleted;
-        _healthBar.enabled = !_displayAwaitable.IsCompleted;
-        _shieldBar.enabled = !_displayAwaitable.IsCompleted;
+        _background.enabled = !_displayAwaitable.IsCompleted && InFrontOfPlayer();
+        _healthBar.enabled = !_displayAwaitable.IsCompleted && InFrontOfPlayer();
+        _shieldBar.enabled = !_displayAwaitable.IsCompleted && InFrontOfPlayer();
 
         if (InCenterScreen()) DisplayBar();
+    }
+
+    private Vector2 GetPosition()
+    {
+        Vector2 offset = _offset * Screen.currentResolution.height;
+        return (Vector2)Camera.main.WorldToScreenPoint(_enemy.transform.position) + offset;
     }
 
     public void DisplayBar()
@@ -53,6 +60,12 @@ public class EnemyStatusBar : MonoBehaviour
         _enemy.Destroyed -= Dispose;
         _enemy.Hit -= DisplayBar;
         Destroy(gameObject);
+    }
+
+    public bool InFrontOfPlayer()
+    {
+        Vector3 viewportPos = Camera.main.WorldToViewportPoint(_enemy.transform.position);
+        return viewportPos.z > 0f;
     }
 
     public bool InCenterScreen()
