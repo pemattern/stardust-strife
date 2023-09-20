@@ -21,8 +21,10 @@ public abstract class Unit : MonoBehaviour
 
     public virtual void TakeDamage(float amount)
     {
-        if (Shield.Current == 0f) Health.Add(-amount);
-        else Shield.Add(-amount);
+        if (Shield.Current == 0f)
+            Health.Add(-amount);
+        else
+            Shield.Add(-amount);
         Hit?.Invoke();
     }
 

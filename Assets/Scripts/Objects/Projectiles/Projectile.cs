@@ -28,7 +28,7 @@ public abstract class Projectile : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.TryGetComponent<Unit>(out Unit unit))
+        if (collider.gameObject.TryGetComponent(out Unit unit))
         {
             if (ShotBy is EnemyUnit && unit is EnemyUnit) return;
             if (ShotBy is PlayerUnit && unit is PlayerUnit) return;

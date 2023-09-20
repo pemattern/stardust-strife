@@ -18,8 +18,9 @@ public class Shield : Stat
     {
         _rechargeSpeed += amount;
     }
-    void Start()
+    public override void Start()
     {
+        base.Start();
         _health = GetComponent<Health>();
 
         Decreased += ShieldDamaged;
@@ -77,6 +78,6 @@ public class Shield : Stat
         Decreased -= ShieldDamaged;
         ReachedZero -= ShieldDestroyed;
         Increased -= ShieldReactivated;
-        Overflow -= _health.Add;
+        Overkill -= _health.Add;
     }
 }

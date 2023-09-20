@@ -18,8 +18,13 @@ public class EnemyStatusBar : MonoBehaviour
     {
         _enemy = enemy;
         _background = GetComponent<Image>();
+        _background.enabled = false;
+        _healthBar.enabled = false;
+        _shieldBar.enabled = false;
+
         _health = enemy.GetComponent<Health>();
         _shield = enemy.GetComponent<Shield>();
+
 
         enemy.Destroyed += Dispose;
         enemy.Hit += DisplayBar;
@@ -29,6 +34,8 @@ public class EnemyStatusBar : MonoBehaviour
     {
         _rectTransform = GetComponent<RectTransform>();
         _displayAwaitable = Awaitable.WaitForSecondsAsync(0f);
+
+        UpdateEnabled();
     }
 
     private void Update()
@@ -37,11 +44,16 @@ public class EnemyStatusBar : MonoBehaviour
         _healthBar.fillAmount = _health.Normalized;
         _shieldBar.fillAmount = _shield.Normalized;
 
+        UpdateEnabled();
+
+        if (InCenterScreen()) DisplayBar();
+    }
+
+    private void UpdateEnabled()
+    {
         _background.enabled = !_displayAwaitable.IsCompleted && InFrontOfPlayer();
         _healthBar.enabled = !_displayAwaitable.IsCompleted && InFrontOfPlayer();
         _shieldBar.enabled = !_displayAwaitable.IsCompleted && InFrontOfPlayer();
-
-        if (InCenterScreen()) DisplayBar();
     }
 
     private Vector2 GetPosition()

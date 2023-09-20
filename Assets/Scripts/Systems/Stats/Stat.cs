@@ -17,7 +17,7 @@ public abstract class Stat : MonoBehaviour
 
     [SerializeField] private float _maxValue;
 
-    void Start()
+    public virtual void Start()
     {
         Current = _maxValue;
     }
@@ -39,7 +39,7 @@ public abstract class Stat : MonoBehaviour
         float overkill = before + amount;
         float overflow = before + amount - _maxValue;
 
-        if (overkill < 0f) Overkill?.Invoke(overkill);
+        if (overkill < 0f){ Overkill?.Invoke(overkill); Debug.Log(overkill); }
         if (overflow > 0f) Overflow?.Invoke(overflow);
 
         if (Current > before) Increased?.Invoke();
