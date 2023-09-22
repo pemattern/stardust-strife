@@ -48,5 +48,6 @@ public abstract class Projectile : MonoBehaviour
         projectile.Speed = speed;
         projectile.LifetimeInSeconds = lifetime;
         projectile.Target = target;
+        if(shotBy is PlayerUnit) Debug.Log("Fire");
     }
 }

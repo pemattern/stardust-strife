@@ -11,7 +11,6 @@ public abstract class Stat : MonoBehaviour
     public event Action Increased;
     public event Action ReachedZero;
     public event Action<float> Overkill;
-    public event Action<float> Overflow;
 
     public float Normalized => Current > 0f ? Current / Max : 0f;
 
@@ -37,10 +36,7 @@ public abstract class Stat : MonoBehaviour
         if (amount != 0f) Changed?.Invoke();
 
         float overkill = before + amount;
-        float overflow = before + amount - _maxValue;
-
-        if (overkill < 0f){ Overkill?.Invoke(overkill); Debug.Log(overkill); }
-        if (overflow > 0f) Overflow?.Invoke(overflow);
+        if (overkill < 0f) Overkill?.Invoke(overkill);
 
         if (Current > before) Increased?.Invoke();
         if (Current < before) Decreased?.Invoke();

@@ -14,8 +14,8 @@ public class AIRepositionState : State
         _playerTransform = playerTransform;
     }
 
-    public override bool EntryCondition => Vector3.Distance(_transform.position, _playerTransform.position) < 50;
-    public override bool ExitCondition => Vector3.Distance(_transform.position, _target) < 75;
+    public override bool EntryCondition => Vector3.Distance(_transform.position, _playerTransform.position) < 100;
+    public override bool ExitCondition => Vector3.Distance(_transform.position, _target) < 25;
 
     public override void Enter()
     {
