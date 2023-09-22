@@ -8,6 +8,7 @@ public abstract class Projectile : MonoBehaviour
     protected Awaitable Lifetime { get; private set; }
     protected Unit ShotBy { get; private set; }
     protected Unit Target {get; private set;}
+    private bool _enteredAHitbox = false;
 
     [SerializeField] protected GameObject _vfxDamaged;
 
@@ -28,10 +29,12 @@ public abstract class Projectile : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.TryGetComponent(out Unit unit))
+        if (collider.gameObject.TryGetComponent(out Unit unit) && !_enteredAHitbox)
         {
             if (ShotBy is EnemyUnit && unit is EnemyUnit) return;
             if (ShotBy is PlayerUnit && unit is PlayerUnit) return;
+
+            _enteredAHitbox = true;
 
             Vector3 collisionPosition = collider.ClosestPointOnBounds(transform.position);
             Instantiate(_vfxDamaged, collisionPosition, Quaternion.identity);
