@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using UnityEngine;
 
 public class AITargetPlayerState : State
@@ -17,7 +16,8 @@ public class AITargetPlayerState : State
     }
 
     public override bool EntryCondition => Vector3.Distance(_transform.position, _playerTransform.position) < 500;
-    public override bool ExitCondition => _minimumDwellTime.IsCompleted;
+    public override bool ExitCondition => _minimumDwellTime.IsCompleted &&
+        Vector3.Distance(_transform.position, _playerTransform.position) < 50;
 
     public override void Enter()
     {
@@ -39,7 +39,7 @@ public class AITargetPlayerState : State
         return new Vector3(pitch, yaw, roll);
     }
 
-    private bool Fire() => Vector3.Dot(_transform.forward, (_playerTransform.position - _transform.position).normalized) > 0.98f;
+    private bool Fire() => Vector3.Dot(_transform.forward, (_playerTransform.position - _transform.position).normalized) > 0.995f;
 
     private Vector3 Thrust(Vector3 prediction)
     {
