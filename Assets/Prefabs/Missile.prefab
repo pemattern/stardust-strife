@@ -29,13 +29,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2886892660322038273}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5117005985907796581
 MeshFilter:
@@ -151,6 +151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _vfxDamaged: {fileID: 6655644345249752944, guid: 8e6b2bc45d1f8c641b0d179408b67122,
     type: 3}
+  _maxDegreesDelta: 1
 --- !u!96 &-3733891266315611870
 TrailRenderer:
   serializedVersion: 3

@@ -6,8 +6,6 @@ public class AITargetPlayerState : State
     private Transform _playerTransform;
     private Transform _transform;
 
-    private Awaitable _minimumDwellTime;
-
     public AITargetPlayerState(StateMachine stateMachine, AIController aiController, Transform playerTransform) : base(stateMachine)
     { 
         _transform = StateMachine.transform; 
@@ -16,8 +14,7 @@ public class AITargetPlayerState : State
     }
 
     public override bool EntryCondition => Vector3.Distance(_transform.position, _playerTransform.position) < 500;
-    public override bool ExitCondition => _minimumDwellTime.IsCompleted &&
-        Vector3.Distance(_transform.position, _playerTransform.position) < 50;
+    public override bool ExitCondition => Vector3.Distance(_transform.position, _playerTransform.position) < 50;
 
     public override void Enter()
     {
@@ -25,8 +22,6 @@ public class AITargetPlayerState : State
         _aiController.GetRotation += TargetPlayer;
         _aiController.GetMovement += Thrust;
         _aiController.GetFire += Fire;
-
-        _minimumDwellTime = Awaitable.WaitForSecondsAsync(8f);
     }
 
     private Vector3 TargetPlayer(Vector3 prediction)

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Missile : Projectile
 {
+    [SerializeField] private float _maxDegreesDelta;
     private Rigidbody _rigidbody;
     private Rigidbody _targetRigidbody;
 
@@ -22,6 +23,6 @@ public class Missile : Projectile
 
         Vector3 heading = _targetRigidbody.position - transform.position;
         Quaternion rotation = Quaternion.LookRotation(heading);
-        _rigidbody.MoveRotation(Quaternion.RotateTowards(transform.rotation, rotation, 4.2f));
+        _rigidbody.MoveRotation(Quaternion.RotateTowards(transform.rotation, rotation, _maxDegreesDelta)); //4.2f
     }
 }
