@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd6c488e401a3f8d7a8c44fae248c40f, type: 3}
+  m_Name: IonBomb
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 7794188261228801540, guid: 956e828567de62eadad4c935195fa922, type: 3}
+  Speed: 25
+  Lifetime: 4
+  Damage: 0

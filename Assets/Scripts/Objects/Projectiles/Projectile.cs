@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public abstract class Projectile : MonoBehaviour
 {
@@ -9,7 +10,6 @@ public abstract class Projectile : MonoBehaviour
     protected Unit ShotBy { get; private set; }
     protected Unit Target {get; private set;}
     private bool _enteredAHitbox = false;
-
     [SerializeField] protected GameObject _vfxDamaged;
 
     protected virtual void Start()
@@ -24,7 +24,7 @@ public abstract class Projectile : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        
+        //
     }
 
     protected virtual void OnTriggerEnter(Collider collider)
@@ -43,7 +43,7 @@ public abstract class Projectile : MonoBehaviour
         }
     }
 
-    public static void Fire(Unit shotBy, Unit target, GameObject prefab, Vector3 position, Quaternion rotation, float damage, float speed, float lifetime)
+    public static Projectile Fire(Unit shotBy, Unit target, GameObject prefab, Vector3 position, Quaternion rotation, float damage, float speed, float lifetime)
     {
         Projectile projectile = Instantiate(prefab, position, rotation).GetComponent<Projectile>();
         projectile.Damage = damage;
@@ -51,6 +51,6 @@ public abstract class Projectile : MonoBehaviour
         projectile.Speed = speed;
         projectile.LifetimeInSeconds = lifetime;
         projectile.Target = target;
-        if(shotBy is PlayerUnit) Debug.Log("Fire");
+        return projectile;
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody), typeof(UpgradeContainer), typeof(Weapon))]
@@ -17,13 +18,17 @@ public class UnitStateMachine : IndefiniteStateMachine
         Rigidbody = GetComponent<Rigidbody>();
         UnitController = _isPlayer ? InputHandler.Instance : GetComponent<AIController>();
 
-        // TODO : MAKE THIS NOT TERRIBLE
-        TargetProvider = _isPlayer ? GameObject.Find("Targeting Marker").GetComponent<LockOnStateMachine>() : null;
-
         UpgradeContainer = GetComponent<UpgradeContainer>();
         
         Weapon[] weapons = GetComponents<Weapon>();
         if (weapons.Length > 2) throw new System.Exception("Too many weapons equipped.");
+
+        // THIS IS PRETTY BAD
+        if (weapons.Where(x => x.RequiresLockOn).Any())
+        {
+            TargetProvider = _isPlayer ? GameObject.Find("Targeting Marker").GetComponent<LockOnStateMachine>() : null;
+        }
+
         foreach (Weapon weapon in weapons)
         {
             if (weapon.IsPrimary)

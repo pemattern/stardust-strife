@@ -1223,7 +1223,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1273933769
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2143,7 +2143,7 @@ GameObject:
   - component: {fileID: 6838476252064400463}
   - component: {fileID: 6838476252064400468}
   - component: {fileID: 6838476252064400470}
-  - component: {fileID: 6838476252064400469}
+  - component: {fileID: 6838476252064400471}
   m_Layer: 10
   m_Name: Spaceship
   m_TagString: Untagged
@@ -2520,21 +2520,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a99c75f3780d9f1409e268d12e42e0ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6838476252064400469
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2352178504066862404}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dde003e3e937e8b78bd8602f22a0ff66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Locked: 0
-  _weaponSettings: {fileID: 11400000, guid: f6a5e28cf17e9c8dc8f00db3c0b6d781, type: 2}
-  _isPrimary: 0
 --- !u!114 &6838476252064400470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2550,6 +2535,21 @@ MonoBehaviour:
   Locked: 0
   _weaponSettings: {fileID: 11400000, guid: 62bcff8d64fab8af7a8db15172c38c40, type: 2}
   _isPrimary: 1
+--- !u!114 &6838476252064400471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2352178504066862404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c92c5b6cb6154200c9361a3f89cb6a56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Locked: 0
+  _weaponSettings: {fileID: 11400000, guid: a91b05f12b7ac42d69ddd872213d1db6, type: 2}
+  _isPrimary: 0
 --- !u!4 &7851051575761762979
 Transform:
   m_ObjectHideFlags: 0

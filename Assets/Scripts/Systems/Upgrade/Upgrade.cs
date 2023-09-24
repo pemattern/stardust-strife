@@ -13,6 +13,11 @@ public abstract class Upgrade : IContainerItem
 
     }
 
+    public virtual void OnRefresh()
+    {
+        
+    }
+
     public virtual void OnUpdate()
     {
 

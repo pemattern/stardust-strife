@@ -17,6 +17,14 @@ public class Container<T> : MonoBehaviour where T : IContainerItem
         _items = new List<T>();
     }
 
+    public void Refresh()
+    {
+        foreach (T item in _items)
+        {
+            item.OnRefresh();
+        }
+    }
+
     void Update()
     {
         foreach (T item in _items)

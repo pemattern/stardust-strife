@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b04905e0e2c1a46ecbec77d95475b4eb, type: 3}
+  m_Name: IonCharger
+  m_EditorClassIdentifier: 
+  ProjectileSettings: {fileID: 11400000, guid: 5cc4200b47bc56bf2a39268877f99cb7, type: 2}
+  Prefab: {fileID: 0}
+  Cooldown: 3
+  RequiresLockOn: 0
