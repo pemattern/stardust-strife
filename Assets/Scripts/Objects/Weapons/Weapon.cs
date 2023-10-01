@@ -29,7 +29,7 @@ public class Weapon : MonoBehaviour
             _unit,
             target,
             _weaponSettings.ProjectileSettings.Prefab,
-            transform.position + transform.forward * 5,
+            transform.position,
             transform.rotation,
             _weaponSettings.ProjectileSettings.Damage,
             _weaponSettings.ProjectileSettings.Speed,

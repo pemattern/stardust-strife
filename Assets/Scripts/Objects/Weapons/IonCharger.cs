@@ -15,7 +15,7 @@ public class IonCharger : Weapon
             _unit,
             target,
             _weaponSettings.ProjectileSettings.Prefab,
-            transform.position,
+            transform.position + transform.forward * 2 + transform.up * -3,
             transform.rotation,
             _weaponSettings.ProjectileSettings.Damage,
             _weaponSettings.ProjectileSettings.Speed,
