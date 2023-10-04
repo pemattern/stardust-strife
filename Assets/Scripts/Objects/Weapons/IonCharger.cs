@@ -15,7 +15,7 @@ public class IonCharger : Weapon
             _unit,
             target,
             _weaponSettings.ProjectileSettings.Prefab,
-            transform.position + transform.forward * 2 + transform.up * -3,
+            transform.position + transform.forward * 2 + transform.up * -1,
             transform.rotation,
             _weaponSettings.ProjectileSettings.Damage,
             _weaponSettings.ProjectileSettings.Speed,
@@ -28,11 +28,11 @@ public class IonCharger : Weapon
     {
         if (_isPrimary)
         {
-            return InputHandler.Instance.Fire;
+            return InputHandler.Instance.FireDown;
         }
         else
         {
-            return InputHandler.Instance.AlternateFire;
+            return InputHandler.Instance.AlternateFireDown;
         }
     }
 }

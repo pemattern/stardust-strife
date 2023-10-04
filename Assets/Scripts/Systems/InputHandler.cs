@@ -9,10 +9,14 @@ public class InputHandler : MonoBehaviour, IUnitController
     public Vector3 Movement {get; private set; }
 
     public bool Fire { get; private set; }
-    public bool AlternateFire {get; private set; }
+    public bool FireDown { get; private set; }
+    public bool AlternateFire { get; private set; }
+    public bool AlternateFireDown { get; private set; }
     public bool Boost { get; private set; }
+    public bool BoostDown { get; private set; }
 
     private InputActions _inputActions;
+
 
     void Awake()
     {
@@ -89,14 +93,26 @@ public class InputHandler : MonoBehaviour, IUnitController
     void OnThrustPerformed(InputAction.CallbackContext context) => Movement = new Vector3(0f, 0f, context.ReadValue<float>());
     void OnThrustCancelled(InputAction.CallbackContext context) => Movement = Vector3.zero;
 
-    void OnFirePerformed(InputAction.CallbackContext context) => Fire = context.ReadValue<float>() > 0f ? true : false;
-    void OnFireCancelled(InputAction.CallbackContext context) => Fire = false;
+    void OnFirePerformed(InputAction.CallbackContext context) 
+    {
+        Fire = context.ReadValue<float>() > 0f ? true : false;
+        FireDown = !(Fire && FireDown);
+    }
+    void OnFireCancelled(InputAction.CallbackContext context) { Fire = false; FireDown = false; }
 
-    void OnAlternateFirePerformed(InputAction.CallbackContext context) => AlternateFire = context.ReadValue<float>() > 0f ? true : false;
-    void OnAlternateFireCancelled(InputAction.CallbackContext context) => AlternateFire = false;
+    void OnAlternateFirePerformed(InputAction.CallbackContext context)
+    {
+        AlternateFire = context.ReadValue<float>() > 0f ? true : false;
+        AlternateFireDown = !(AlternateFire && AlternateFireDown);
+    }
+    void OnAlternateFireCancelled(InputAction.CallbackContext context) { AlternateFire = false; AlternateFireDown = false; }
 
-    void OnBoostPerformed(InputAction.CallbackContext context) => Boost = context.ReadValue<float>() > 0f ? true : false;
-    void OnBoostCancelled(InputAction.CallbackContext context) => Boost = false;
+    void OnBoostPerformed(InputAction.CallbackContext context)
+    {
+        Boost = context.ReadValue<float>() > 0f ? true : false;
+        BoostDown = !(Boost && BoostDown);
+    }
+    void OnBoostCancelled(InputAction.CallbackContext context) { Boost = false; BoostDown = false; }
 
     void Quit(InputAction.CallbackContext context) => Application.Quit();
 }
